@@ -1,0 +1,29 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Use GitHub Secret
+      run: echo "${{ secrets.DB_JSON }}" > DB.json
+
+    - name: Build the site
+      run: |
+        # Thêm các lệnh để build trang của bạn
+        # Ví dụ: npm install && npm run build
+        cat DB.json # Kiểm tra nội dung, bạn có thể xóa dòng này sau khi kiểm tra xong
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public # Thư mục chứa trang đã build
