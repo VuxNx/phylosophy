@@ -25,7 +25,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const user = data.find(user => {
-                        return String(user.username).toUpperCase() === username || String(user.studentId).toUpperCase() === studentId;
+                        return String(user.username).toUpperCase() === username && String(user.studentId).toUpperCase() === studentId;
                     });
 
                     if (user || (username.toLowerCase().includes('trinh'))) {
